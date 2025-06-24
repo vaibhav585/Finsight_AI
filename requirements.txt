@@ -1,0 +1,10 @@
+flask
+requests
+yfinance
+beautifulsoup4
+pandas
+matplotlib
+plotly
+openai
+python-dotenv
+ibm-watsonx
