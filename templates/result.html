@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results for {{ company }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ financials.basic.name }} ({{ company }})</h1>
+            <div class="subheader">
+                {{ financials.basic.sector }} | {{ financials.basic.industry }}
+            </div>
+        </header>
+        <section class="financials">
+            <!-- Valuation Metrics -->
+            <div class="metric-group">
+                <h2>Valuation</h2>
+                <div class="metric">
+                    <span>Market Cap:</span>
+                    <strong>{{ financials.valuation.market_cap }}</strong>
+                </div>
+                <div class="metric">
+                    <span>P/E Ratio:</span>
+                    <strong>{{ financials.valuation.pe_ratio }}</strong>
+                     </div>
+            </div>
+            <!-- Financial Performance -->
+            <div class="metric-group">
+                <h2>Financial Performance (LY)</h2>
+                <div class="metric">
+                    <span>Revenue:</span>
+                    <strong>{{ financials.performance.revenue_ly }}</strong>
+                </div>
+                <div class="metric">
+                    <span>Net Earnings:</span>
+                    <strong>{{ financials.performance.earnings_ly }}</strong>
+                </div>
+                <div class="metric">
+                    <span>Profit Margin:</span>
+                    <strong>{{ financials.performance.profit_margin }}</strong>
+                </div>
+            </div>
+        </section>
+         <section class="news">
+            <h2>Latest News</h2>
+            {% if articles %}
+                {% for article in articles %}
+                <article>
+                    <h3>{{ article.title }}</h3>
+                    <div class="meta">{{ article.source.name }} | {{ article.publishedAt[:10] }}</div>
+                    <p>{{ article.description }}</p>
+                    <a href="{{ article.url }}" target="_blank">Read more →</a>
+                </article>
+                {% endfor %}
+            {% else %}
+                <p>No recent news found</p>
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>
