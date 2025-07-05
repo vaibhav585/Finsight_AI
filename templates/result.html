@@ -23,7 +23,7 @@
                 <div class="metric">
                     <span>P/E Ratio:</span>
                     <strong>{{ financials.valuation.pe_ratio }}</strong>
-                     </div>
+                </div>
             </div>
             <!-- Financial Performance -->
             <div class="metric-group">
@@ -42,7 +42,13 @@
                 </div>
             </div>
         </section>
-         <section class="news">
+
+        <section class="summary">
+            <h2>Summary</h2>
+            <p>{{ summary }}</p>
+        </section>
+
+        <section class="news">
             <h2>Latest News</h2>
             {% if articles %}
                 {% for article in articles %}
