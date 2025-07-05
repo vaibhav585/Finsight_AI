@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request
 import yfinance as yf
 from newsapi import NewsApiClient
+from granite_summarizer import summarize_company_news
+
 app = Flask(__name__)
 # Initialize news API client
 news_api_client = NewsApiClient(api_key='e5d05e4d54684544976d5a30b3b37634')
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -42,17 +45,23 @@ def index():
                 page_size=5
             )
             
+            # Summarize news using granite_summarizer with method parameter
+            summary_method = request.form.get('summary_method', 'nltk')  # default to nltk
+            summary = summarize_company_news(company_name, news_results.get('articles', []), method=summary_method)
+            
             return render_template(
                 'result.html',
                 financials=financials,
                 company=company_name.upper(),
                 articles=news_results.get('articles', []),
+                summary=summary,
                 currency=info.get('currency', 'USD')
             )
         except Exception as e:
             return render_template('error.html', error=str(e))
             
     return render_template('index.html')
+
 # Helper formatting methods
 def format_money(value):
     if value is None: return "N/A"

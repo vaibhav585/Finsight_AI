@@ -1,7 +1,25 @@
-<form method="POST">
-  <input type="text" name="company_name" placeholder="Enter stock symbol" required>
-  <button type="submit">Search</button>
-  {% if error %}
-    <p class="error">{{ error }}</p>
-  {% endif %}
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FinSightAI - Search</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>FinSightAI</h1>
+        <form method="POST">
+            <input type="text" name="company_name" placeholder="Enter stock symbol" required>
+            <label for="summary_method">Summarization Method:</label>
+            <select name="summary_method" id="summary_method">
+                <option value="nltk" selected>NLTK (default)</option>
+                <option value="huggingface">HuggingFace Transformers</option>
+                <option value="watsonx">IBM Watsonx (not available)</option>
+            </select>
+            <button type="submit">Search</button>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>
